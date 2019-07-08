@@ -1,0 +1,43 @@
+<idea-plugin>
+    <id>com.pytest_support</id>
+    <name>Py.test support</name>
+    <version>1.4</version>
+    <vendor email="1998uriyyo@gmail.com">Yurii Karabas</vendor>
+
+    <description>
+        A plugin that helps pycharm work with py.test framework
+    </description>
+
+    <change-notes>
+        Fix NullPointerException exception
+    </change-notes>
+
+    <idea-version since-build="10.0"/>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.python</depends>
+
+    <extensions defaultExtensionNs="Pythonid">
+        <typeProvider implementation="com.pytest_support.fixtures.FixtureTypeProvider" order="last"/>
+        <typeProvider implementation="com.pytest_support.pytest_hooks.PytestHooksTypeProvider" order="last"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <findUsagesHandlerFactory implementation="com.pytest_support.fixtures.FixtureUsageTargetProvider"/>
+
+        <gotoDeclarationHandler implementation="com.pytest_support.fixtures.FixtureGoToDeclarationHandler"
+                                order="first"/>
+        <gotoDeclarationHandler implementation="com.pytest_support.pytest_hooks.PytestHooksGoToDeclarationHandler"
+                                order="first"/>
+
+        <completion.contributor language="Python"
+                                implementationClass="com.pytest_support.fixtures.FixtureNamesCompletionContributor"
+                                order="last"/>
+        <completion.contributor language="Python"
+                                implementationClass="com.pytest_support.pytest_hooks.PytestHooksCompletionContributor"
+                                order="last"/>
+    </extensions>
+
+    <actions>
+    </actions>
+
+</idea-plugin>

@@ -15,6 +15,7 @@
     <idea-version since-build="10.0"/>
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.modules.python</depends>
+    <depends>com.intellij.modules.pycharm</depends>
 
     <extensions defaultExtensionNs="Pythonid">
         <typeProvider implementation="com.pytest_support.fixtures.FixtureTypeProvider" order="last"/>

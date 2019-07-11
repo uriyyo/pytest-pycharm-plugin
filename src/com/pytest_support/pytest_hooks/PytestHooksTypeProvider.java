@@ -5,7 +5,7 @@ import com.jetbrains.python.psi.PyFunction;
 import com.jetbrains.python.psi.PyReferenceExpression;
 import com.jetbrains.python.psi.types.PyType;
 import com.jetbrains.python.psi.types.TypeEvalContext;
-import com.pytest_support.consts.PytestConsts;
+import com.pytest_support.consts.PytestConstsKt;
 import com.pytest_support.utils.FixtureUtils;
 import com.pytest_support.utils.PytestUtils;
 import com.pytest_support.utils.TypeUtils;
@@ -24,11 +24,11 @@ public class PytestHooksTypeProvider extends PyUserSkeletonsTypeProvider {
     ) {
         PyFunction testFunction = FixtureUtils.getFunctionFromElement(referenceExpression);
 
-        if (testFunction != null && PytestConsts.inFunctionElement.accepts(referenceExpression)
+        if (testFunction != null && PytestConstsKt.getInFunctionElement().accepts(referenceExpression)
                 && PytestUtils.isTestOrPytestFile(referenceExpression)) {
             String name = referenceExpression.getName();
 
-            return Optional.ofNullable(PytestConsts.hookTypes.getOrDefault(name, null))
+            return Optional.ofNullable(PytestConstsKt.getHookTypes().getOrDefault(name, null))
                     .map(function -> TypeUtils.getElementType(referenceExpression.getProject(), function))
                     .orElse(null);
         }

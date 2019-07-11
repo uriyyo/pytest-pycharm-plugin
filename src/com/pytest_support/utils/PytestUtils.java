@@ -3,12 +3,12 @@ package com.pytest_support.utils;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.jetbrains.python.psi.PyFile;
-import com.pytest_support.consts.PytestConsts;
+import com.pytest_support.consts.PytestConstsKt;
 
 public class PytestUtils {
 
     public static boolean isPytestFile(PyFile file) {
-        return PytestConsts.PYTEST_FILES.contains(file.getName());
+        return PytestConstsKt.getPYTEST_FILES().contains(file.getName());
     }
 
     public static boolean isTestFile(PyFile file) {

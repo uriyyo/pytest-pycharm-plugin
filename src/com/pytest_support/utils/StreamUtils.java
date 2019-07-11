@@ -5,7 +5,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.jetbrains.python.psi.PyFile;
 import com.jetbrains.python.psi.PyFunction;
-import com.pytest_support.consts.PytestConsts;
+import com.pytest_support.consts.PytestConstsKt;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -20,7 +20,7 @@ public class StreamUtils {
         }
 
         Collection<PyFile> files = new ArrayList<>();
-        Optional.ofNullable(directory.findFile(PytestConsts.CONFTEST)).ifPresent(file -> files.add((PyFile) file));
+        Optional.ofNullable(directory.findFile(PytestConstsKt.CONFTEST)).ifPresent(file -> files.add((PyFile) file));
         Optional.ofNullable(directory.getParentDirectory())
                 .ifPresent(parentDirectory -> files.addAll(pytestConftests(parentDirectory)));
 

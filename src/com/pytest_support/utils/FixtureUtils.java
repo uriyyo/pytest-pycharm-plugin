@@ -7,18 +7,16 @@ import com.jetbrains.python.psi.PyDecoratorList;
 import com.jetbrains.python.psi.PyFile;
 import com.jetbrains.python.psi.PyFunction;
 import com.jetbrains.python.psi.types.PyType;
-import com.pytest_support.consts.PytestConsts;
+import com.pytest_support.consts.PytestConstsKt;
 
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import static com.pytest_support.consts.PytestConsts.functionParameter;
-
 public class FixtureUtils {
 
     public static boolean isFixtureReference(PsiElement psiElement) {
-        return functionParameter.accepts(psiElement);
+        return PytestConstsKt.getFunctionParameter().accepts(psiElement);
     }
 
 
@@ -28,7 +26,7 @@ public class FixtureUtils {
         }
         PyDecoratorList decoratorList = function.getDecoratorList();
 
-        return decoratorList != null && PytestConsts.DECARATORS.stream()
+        return decoratorList != null && PytestConstsKt.getDECARATORS().stream()
                 .anyMatch(name -> decoratorList.findDecorator(name) != null);
     }
 

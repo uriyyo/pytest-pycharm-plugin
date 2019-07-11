@@ -6,7 +6,7 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.jetbrains.python.psi.PyFunction;
-import com.pytest_support.consts.PytestConsts;
+import com.pytest_support.consts.PytestConstsKt;
 import com.pytest_support.utils.PytestUtils;
 import com.pytest_support.utils.TypeUtils;
 import icons.PythonIcons;
@@ -22,7 +22,7 @@ public class PytestHooksCompletionContributor extends CompletionContributor {
     public PytestHooksCompletionContributor() {
         this.extend(
                 CompletionType.BASIC,
-                PytestConsts.functionDefinition,
+                PytestConstsKt.getFunctionDefinition(),
                 new PytestHooksCompletionProvider()
         );
     }
@@ -54,7 +54,7 @@ public class PytestHooksCompletionContributor extends CompletionContributor {
                 @NotNull CompletionResultSet result
         ) {
             PsiElement psiElement = completionParameters.getPosition().getOriginalElement();
-            if (psiElement != null && PytestConsts.functionDefinition.accepts(psiElement)
+            if (psiElement != null && PytestConstsKt.getFunctionDefinition().accepts(psiElement)
                     && PytestUtils.isTestOrPytestFile(psiElement)) {
                 Collection<PyFunction> moduleFunctions = TypeUtils.getModuleFunctions(
                         completionParameters.getPosition().getProject(), "_pytest.hookspec"

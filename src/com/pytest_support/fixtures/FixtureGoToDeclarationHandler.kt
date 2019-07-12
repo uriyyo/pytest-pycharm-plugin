@@ -6,9 +6,6 @@ import com.intellij.psi.PsiElement
 import com.jetbrains.python.psi.PyFile
 import com.pytest_support.extensions.fixtures
 import com.pytest_support.extensions.isFixtureReference
-import com.pytest_support.utils.FixtureUtils
-import com.pytest_support.utils.StreamUtils
-import kotlin.streams.asSequence
 
 class FixtureGoToDeclarationHandler : GotoDeclarationHandlerBase() {
 

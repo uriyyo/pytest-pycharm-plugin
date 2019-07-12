@@ -5,11 +5,8 @@ import com.jetbrains.python.psi.PyFile
 import com.jetbrains.python.psi.PyReferenceExpression
 import com.jetbrains.python.psi.types.PyType
 import com.jetbrains.python.psi.types.TypeEvalContext
-import com.pytest_support.consts.PytestConsts
-import com.pytest_support.extensions.fixtures
-import com.pytest_support.extensions.returnType
-import com.pytest_support.extensions.withName
-import com.pytest_support.utils.FixtureUtils
+import com.pytest_support.consts.REQUEST_FIXTURE_NAME
+import com.pytest_support.extensions.*
 
 class FixtureTypeProvider : PyUserSkeletonsTypeProvider() {
 
@@ -17,19 +14,21 @@ class FixtureTypeProvider : PyUserSkeletonsTypeProvider() {
             referenceExpression: PyReferenceExpression,
             context: TypeEvalContext
     ): PyType? {
-        val testFunction = FixtureUtils.getFunctionFromElement(referenceExpression)
-        val fixtureName = referenceExpression.name
+        if (referenceExpression.function === null) {
+            return null
+        }
 
-        return if (FixtureUtils.isTestFunctionOrFixture(testFunction, fixtureName)) {
+        val testFunction = referenceExpression.function!!
+        val fixtureName = referenceExpression.name!!
 
-            if (fixtureName == PytestConsts.REQUEST_FIXTURE_NAME)
-                FixtureUtils.getFixtureRequestType(referenceExpression.project)
+        return if (testFunction.isTest(fixtureName) || testFunction.isFixture(fixtureName)) {
+            if (fixtureName == REQUEST_FIXTURE_NAME)
+                referenceExpression.project.elementType("FixtureRequest")
             else (testFunction.containingFile as PyFile)
                     .fixtures()
                     .withName(fixtureName)
                     .returnType()
-                    .first()
-
+                    .firstOrNull()
         } else null
     }
 }

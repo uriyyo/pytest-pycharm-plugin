@@ -15,8 +15,8 @@ object GenerateUtils {
 
     fun createModuleCode(module: String): String = "import $module\ndef _():return $module"
 
-    fun <T : PsiElement, R : PyType> generateCode(
-            project: Project, code: String, generateType: Class<T>, returnType: Class<R>
+    inline fun <reified R : PyType> generateCode(
+            project: Project, code: String, generateType: Class<out PsiElement>
     ): R? =
             PyElementGenerator
                     .getInstance(project)

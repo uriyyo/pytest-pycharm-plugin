@@ -60,16 +60,14 @@ fun Project.instanceType(module: String, component: String): PyType? =
         GenerateUtils.generateCode(
                 this,
                 GenerateUtils.createInstanceCode(module, component),
-                PyFromImportStatement::class.java,
-                PyType::class.java
+                PyFromImportStatement::class.java
         )
 
 fun Project.moduleType(module: String): PyModuleType? =
         GenerateUtils.generateCode(
                 this,
                 GenerateUtils.createModuleCode(module),
-                PyImportStatement::class.java,
-                PyModuleType::class.java
+                PyImportStatement::class.java
         )
 
 fun Project.moduleFunctions(module: String): List<PyFunction> =

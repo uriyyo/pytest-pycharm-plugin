@@ -8,9 +8,6 @@ import com.jetbrains.python.PythonLanguage
 import com.jetbrains.python.psi.PyFunction
 import com.jetbrains.python.psi.PyParameterList
 
-import java.util.Arrays
-import java.util.HashMap
-
 const val CONFTEST = "conftest.py"
 const val PLUGIN = "plugin.py"
 const val PYTEST_PLUGIN = "pytest_plugin.py"
@@ -38,7 +35,7 @@ val inFunctionElement: ElementPattern<PsiElement> = PlatformPatterns
         .withLanguage(PythonLanguage.getInstance())
         .inside(PyFunction::class.java)
 
-val hookTypes = mapOf(
+val hookTypes: Map<String, String> = mapOf(
         "pluginmanager" to "PytestPluginManager",
         "plugin" to "PytestPluginManager",
         "manager" to "PytestPluginManager",

@@ -4,12 +4,10 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiNamedElement
 import com.intellij.util.toArray
 import com.jetbrains.python.psi.PyFunction
-import com.pytest_support.utils.FixtureUtils
-import com.pytest_support.utils.TypeUtils
 
-fun Sequence<PyFunction>.fixtures() = filter { FixtureUtils.isFixture(it) }
+fun Sequence<PyFunction>.fixtures() = filter { it.isFixture }
 
-fun Sequence<PyFunction>.fixturesOrTests() = filter { FixtureUtils.isTestFunctionOrFixture(it) }
+fun Sequence<PyFunction>.fixturesOrTests() = filter { it.isTest || it.isFixture }
 
 fun Sequence<PyFunction>.toParameter(name: String) = mapNotNull { it.parameterList.findParameterByName(name) }
 
@@ -19,4 +17,4 @@ fun Sequence<PsiNamedElement>.names() = mapNotNull { it.name }
 
 fun Sequence<PyFunction>.withName(name: String?) = filter { it.name == name }
 
-fun Sequence<PyFunction>.returnType() = mapNotNull { TypeUtils.getFunctionReturnType(it) }
+fun Sequence<PyFunction>.returnType() = mapNotNull { it.returnType }

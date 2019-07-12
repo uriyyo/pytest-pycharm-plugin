@@ -10,6 +10,12 @@ import com.pytest_support.extensions.isTestOrFixtureParameter
 import com.pytest_support.extensions.names
 import icons.PythonIcons
 
+
+val REQUEST_ELEMENT: LookupElementBuilder = LookupElementBuilder
+        .create("request")
+        .withIcon(PythonIcons.Python.Function)
+
+
 class FixtureNamesCompletionContributor : CompletionContributor() {
     init {
         this.extend(
@@ -26,20 +32,19 @@ class FixtureNamesCompletionContributor : CompletionContributor() {
                 processingContext: ProcessingContext,
                 result: CompletionResultSet
         ) {
-
             if (completionParameters.position.isTestOrFixtureParameter()) {
-                result.addElement(LookupElementBuilder.create("request").withIcon(PythonIcons.Python.Function))
+                result.addElement(REQUEST_ELEMENT)
 
                 (completionParameters.originalFile as PyFile)
                         .fixtures()
                         .names()
-                        .forEach { name ->
-                            result.addElement(
-                                    LookupElementBuilder
-                                            .create(name)
-                                            .withIcon(PythonIcons.Python.Function)
-                            )
+                        .map {
+                            LookupElementBuilder
+                                    .create(it)
+                                    .withIcon(PythonIcons.Python.Function)
                         }
+                        .forEach { result.addElement(it) }
+
                 result.stopHere()
             }
         }

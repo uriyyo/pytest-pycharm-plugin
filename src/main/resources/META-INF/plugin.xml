@@ -1,11 +1,11 @@
 <idea-plugin>
     <id>com.uriyyo.pytest.pytest-plugin</id>
-    <name>pytest-support</name>
+    <name>better pytest</name>
     <version>1.5</version>
     <vendor email="1998uriyyo@gmail.com">Yurii Karabas</vendor>
 
     <description>
-        A plugin that helps pycharm work with py.test framework
+        PyCharm plugin that makes integration with pytest better
     </description>
 
     <change-notes>

@@ -8,7 +8,7 @@ plugins {
 
 
 group = "com.uriyyo.pytest"
-version = "1.0-SNAPSHOT"
+version = "1.5"
 
 repositories {
     mavenCentral()

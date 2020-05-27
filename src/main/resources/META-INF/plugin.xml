@@ -1,0 +1,45 @@
+<idea-plugin>
+    <id>com.uriyyo.pytest.pytest-plugin</id>
+    <name>better pytest</name>
+    <version>1.5</version>
+    <vendor email="1998uriyyo@gmail.com">Yurii Karabas</vendor>
+
+    <description>
+        PyCharm plugin that makes integration with pytest better
+    </description>
+
+    <change-notes>
+        Move project code base to gradle build system
+        Remove duplicated functionality
+    </change-notes>
+
+    <idea-version since-build="192"/>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.python</depends>
+    <depends>com.intellij.modules.pycharm</depends>
+
+    <extensions defaultExtensionNs="Pythonid">
+        <typeProvider implementation="com.uriyyo.pytest.types.PyTestInternalTypeProvider"
+                      order="last"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <gotoDeclarationHandler implementation="com.uriyyo.pytest.hooks.PyTestHooksGoToDeclarationHandler"
+                                order="first"/>
+
+        <completion.contributor
+                implementationClass="com.uriyyo.pytest.hooks.PyTestHooksParameterCompletionContributor"
+                language="Python"
+                order="last"/>
+
+        <completion.contributor
+                implementationClass="com.uriyyo.pytest.fixtures.PyTestFixtureRequestCompletionContributor"
+                language="Python"
+                order="last"/>
+
+    </extensions>
+
+    <actions>
+    </actions>
+
+</idea-plugin>

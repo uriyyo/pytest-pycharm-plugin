@@ -5,7 +5,6 @@ import com.jetbrains.python.psi.types.PyType
 import com.jetbrains.python.psi.types.TypeEvalContext
 import com.uriyyo.pytest.INTERNAL_TYPES
 
-
 val INTERNAL_MODULES = arrayOf("_pytest", "py")
 
 private fun isInternalType(qname: String?): Boolean =

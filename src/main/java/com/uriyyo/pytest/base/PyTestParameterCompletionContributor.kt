@@ -24,9 +24,9 @@ abstract class PyTestParameterCompletionContributor : CompletionContributor() {
 
 abstract class PyTestArgumentCompletion : CompletionProvider<CompletionParameters>() {
     override fun addCompletions(
-            parameters: CompletionParameters,
-            context: ProcessingContext,
-            result: CompletionResultSet
+        parameters: CompletionParameters,
+        context: ProcessingContext,
+        result: CompletionResultSet
     ) {
         parameters
                 .position

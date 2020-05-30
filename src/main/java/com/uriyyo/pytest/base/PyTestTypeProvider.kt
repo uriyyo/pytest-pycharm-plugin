@@ -9,8 +9,8 @@ import com.jetbrains.python.psi.types.TypeEvalContext
 abstract class PyTestTypeProvider : PyTypeProviderBase() {
 
     override fun getReferenceExpressionType(
-            reference: PyReferenceExpression,
-            context: TypeEvalContext
+        reference: PyReferenceExpression,
+        context: TypeEvalContext
     ): PyType? =
             when (val element = reference.originalElement) {
                 is PyElement -> getType(element, context)

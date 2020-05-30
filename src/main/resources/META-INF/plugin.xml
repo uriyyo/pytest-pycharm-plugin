@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.uriyyo.pytest.pytest-plugin</id>
-    <name>better pytest</name>
-    <version>1.5</version>
+    <name>Better pytest</name>
+    <version>1.6</version>
     <vendor email="1998uriyyo@gmail.com">Yurii Karabas</vendor>
 
     <description>
@@ -9,8 +9,8 @@
     </description>
 
     <change-notes>
-        Move project code base to gradle build system
-        Remove duplicated functionality
+        Add hook names autocompletion
+        Fix bug when request introspection doesn't work inside test
     </change-notes>
 
     <idea-version since-build="192"/>
@@ -29,6 +29,11 @@
 
         <completion.contributor
                 implementationClass="com.uriyyo.pytest.hooks.PyTestHooksParameterCompletionContributor"
+                language="Python"
+                order="last"/>
+
+        <completion.contributor
+                implementationClass="com.uriyyo.pytest.hooks.PyTestHooksNameCompletionContributor"
                 language="Python"
                 order="last"/>
 

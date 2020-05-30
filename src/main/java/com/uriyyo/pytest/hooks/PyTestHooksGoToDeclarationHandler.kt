@@ -10,8 +10,7 @@ import com.uriyyo.pytest.extensions.getParentOrSelf
 class PyTestHooksGoToDeclarationHandler : GotoDeclarationHandlerBase() {
 
     override fun getGotoDeclarationTarget(psiElement: PsiElement?, editor: Editor): PsiElement? =
-            psiElement
+            psiElement.takeIf { it?.parent is PyFunction }
                     ?.getParentOrSelf<PyFunction>()
                     ?.getHook()
-
 }

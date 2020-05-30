@@ -15,5 +15,4 @@ class PyTestHooksParameterCompletionContributor : PyTestParameterCompletionContr
                         ?.parameterNames
                         ?.asSequence()
     }
-
 }

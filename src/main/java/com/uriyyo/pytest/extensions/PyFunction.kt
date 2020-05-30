@@ -5,23 +5,28 @@ import com.jetbrains.python.psi.PyFunction
 import com.jetbrains.python.psi.stubs.PyFunctionNameIndex
 import com.jetbrains.python.testing.pyTestFixtures.isCustomFixture
 
-
 fun PyDecoratorList.hasDecorator(vararg names: String) =
         names.any { findDecorator(it) != null }
 
-fun PyFunction.isFixture(): Boolean =
-        decoratorList
-                ?.hasDecorator("pytest.fixture", "fixture")
-                ?: false
-                || isCustomFixture()
+val PyFunction.isTest
+    get(): Boolean =
+        name?.let { it.startsWith("test") || it.endsWith("test") } ?: false
 
-fun PyFunction.isHook(): Boolean = this.getHook() !== null
+val PyFunction.isFixture
+    get(): Boolean =
+        decoratorList
+                ?.hasDecorator("pytest.fixture", "fixture", "pytest.yield_fixture", "yield_fixture")
+                ?: false ||
+                isCustomFixture()
+
+val PyFunction.isHook
+    get(): Boolean = getHook() !== null
 
 fun PyFunction.getHook(): PyFunction? =
-        PyFunctionNameIndex.find(this.name, this.project)
+        PyFunctionNameIndex.find(name, project)
                 .firstOrNull {
                     it.qualifiedName?.startsWith("_pytest.hookspec") ?: false
                 }
 
 val PyFunction.parameterNames
-    get(): Collection<String> = this.parameterList.parameters.mapNotNull { it.name }
+    get(): Collection<String> = parameterList.parameters.mapNotNull { it.name }

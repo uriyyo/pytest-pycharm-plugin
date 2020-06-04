@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.uriyyo.pytest.pytest-plugin</id>
     <name>Better pytest</name>
-    <version>1.6</version>
+    <version>1.7</version>
     <vendor email="1998uriyyo@gmail.com">Yurii Karabas</vendor>
 
     <description>
@@ -9,8 +9,7 @@
     </description>
 
     <change-notes>
-        Add hook names autocompletion
-        Fix bug when request introspection doesn't work inside test
+        Add support fixture which declared as async functions
     </change-notes>
 
     <idea-version since-build="192"/>
@@ -21,6 +20,9 @@
     <extensions defaultExtensionNs="Pythonid">
         <typeProvider implementation="com.uriyyo.pytest.types.PyTestInternalTypeProvider"
                       order="last"/>
+
+        <typeProvider implementation="com.uriyyo.pytest.types.PyTestCoroutineTypeProvider"
+                      order="first"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">

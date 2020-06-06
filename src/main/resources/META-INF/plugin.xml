@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.uriyyo.pytest.pytest-plugin</id>
     <name>Better pytest</name>
-    <version>1.7</version>
+    <version>1.8</version>
     <vendor email="1998uriyyo@gmail.com">Yurii Karabas</vendor>
 
     <description>
@@ -9,7 +9,8 @@
     </description>
 
     <change-notes>
-        Add support fixture which declared as async functions
+        Add completion for addoptions
+        Add completion for markers
     </change-notes>
 
     <idea-version since-build="192"/>
@@ -19,7 +20,7 @@
 
     <extensions defaultExtensionNs="Pythonid">
         <typeProvider implementation="com.uriyyo.pytest.types.PyTestInternalTypeProvider"
-                      order="last"/>
+                      order="first"/>
 
         <typeProvider implementation="com.uriyyo.pytest.types.PyTestCoroutineTypeProvider"
                       order="first"/>
@@ -28,6 +29,16 @@
     <extensions defaultExtensionNs="com.intellij">
         <gotoDeclarationHandler implementation="com.uriyyo.pytest.hooks.PyTestHooksGoToDeclarationHandler"
                                 order="first"/>
+
+        <completion.contributor
+                implementationClass="com.uriyyo.pytest.addoption.PyTestGetAddOptionCompletionContributor"
+                language="Python"
+                order="last"/>
+
+        <completion.contributor
+                implementationClass="com.uriyyo.pytest.markers.PyTestMarkersCompletionContributor"
+                language="Python"
+                order="last"/>
 
         <completion.contributor
                 implementationClass="com.uriyyo.pytest.hooks.PyTestHooksParameterCompletionContributor"
